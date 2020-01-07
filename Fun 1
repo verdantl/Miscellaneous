@@ -1,0 +1,108 @@
+X = 'X '
+O = 'O '
+possible = {'a1': ['- '], 'a2': ['- '], 'a3': ['- ', '\n'], 'b1': ['- '], 'b2': ['- '],\
+            'b3': ['- ', '\n'], 'c1': ['- '], 'c2': ['- '], 'c3': ['- ', '\n']}
+list_of_keys = ['a1', 'a2', 'a3', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3']
+
+moves = 0
+    win = False
+    while moves < 9 and not win:
+        coordinate = 'nope'
+        if (moves % 2) == 0:
+            player1 = True
+            player2 = False
+
+        else:
+            player1 = False
+            player2 = True
+
+        for key in possible:
+            for i in range(len(possible[key])):
+                print(possible[key][i], end='')
+
+        coordinate = helper(coordinate, list_of_keys, player1, player2)
+
+        if player1:
+            possible[coordinate][0] = X
+        elif player2:
+            possible[coordinate][0] = O
+
+        list_of_keys.pop(list_of_keys.index(coordinate))
+        if possible['a1'][0] == possible['a2'][0] == possible['a3'][0] != '- ':
+            win = True
+        if possible['b1'][0] == possible['b2'][0] == possible['b3'][0] != '- ':
+            win = True
+        if possible['c1'][0] == possible['c2'][0] == possible['c3'][0] != '- ':
+            win = True
+        if possible['a1'][0] == possible['b1'][0] == possible['c1'][0] != '- ':
+            win = True
+        if possible['a2'][0] == possible['b2'][0] == possible['c2'][0] != '- ':
+            win = True
+        if possible['a3'][0] == possible['b3'][0] == possible['c3'][0] != '- ':
+            win = True
+        if possible['a1'][0] == possible['b2'][0] == possible['c3'][0] != '- ':
+            win = True
+        if possible['a3'][0] == possible['b2'][0] == possible['c1'][0] != '- ':
+            win = True
+        if win:
+            helper2()
+        moves += 1
+    for key in possible:
+        for i in range(len(possible[key])):
+            print(possible[key][i], end='')
+    return 'Game Over'
+def helper2():
+    for key in possible:
+        for i in range(len(possible[key])):
+                print(possible[key][i], end='')
+    if possible['a1'][0] == possible['a2'][0] == possible['a3'][0] != '- ':
+        if possible['a1'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a1'][0] == O:
+            print('Player 2 wins!')
+    if possible['b1'][0] == possible['b2'][0] == possible['b3'][0] != '- ':
+        if possible['b1'][0] == X:
+                print('Player 1 wins!')
+        elif possible['b1'][0] == O:
+                print('Player 2 wins!')
+    if possible['c1'][0] == possible['c2'][0] == possible['c3'][0] != '- ':
+        if possible['c1'][0] == X:
+            print('Player 1 wins!')
+        elif possible['c1'][0] == O:
+            print('Player 2 wins!')
+    if possible['a1'][0] == possible['b1'][0] == possible['c1'][0] != '- ':
+        if possible['a1'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a1'][0] == O:
+            print('Player 2 wins!')
+    if possible['a2'][0] == possible['b2'][0] == possible['c2'][0] != '- ':
+        if possible['a2'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a2'][0] == O:
+            print('Player 2 wins!')
+    if possible['a3'][0] == possible['b3'][0] == possible['c3'][0] != '- ':
+        if possible['a3'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a3'][0] == O:
+            print('Player 2 wins!')
+    if possible['a1'][0] == possible['b2'][0] == possible['c3'][0] != '- ':
+        if possible['a1'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a1'][0] == O:
+            print('Player 2 wins!')
+    if possible['a3'][0] == possible['b2'][0] == possible['c1'][0] != '- ':
+        if possible['a3'][0] == X:
+            print('Player 1 wins!')
+        elif possible['a3'][0] == O:
+            print('Player 2 wins!')
+    return 'Game Over'
+def helper(coordinate, keys, player1, player2):
+
+    while coordinate not in list_of_keys:
+        if player1:
+            coordinate = input("P1, where do you want to go? ").lower()
+        elif player2:
+            coordinate = input("P2, where do you want to go? ").lower()
+    return coordinate
+tictactoe()
+
